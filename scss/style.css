@@ -46,6 +46,20 @@
   transition: 0.8s;
 }
 
+#hero {
+  display: flex;
+  height: 600px;
+  width: auto;
+}
+#hero .hero_img {
+  background: url(./../img/ramen_photo.jpg) no-repeat;
+  background-size: 100vw auto;
+  content: "";
+  display: block;
+  width: 100vw;
+  height: auto;
+}
+
 html {
   scroll-behavior: smooth;
 }
