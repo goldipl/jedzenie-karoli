@@ -1,1 +1,13 @@
-// Empty file
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import 'header';
+@import 'hero_section';
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Questrial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
