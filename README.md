@@ -12,3 +12,4 @@ Cooking website
 * SCSS
 
 ## Live :star2:
+https://goldipl.github.io/jedzenie-karoli/
