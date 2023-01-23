@@ -1,10 +1,12 @@
 #header {
     display: flex;
     justify-content: center;
-    background-color: #2c08a4;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #111111;
     height: 80px;
     width: 100vw;
+    box-shadow: 0 2px 16px -8px #888888;
+    margin-bottom: 16px;
     .header_container {
         display: flex;
         flex-direction: row;
@@ -19,7 +21,7 @@
             font-size: 28px;
             a {
                 text-decoration: none;
-                color: #ffffff;
+                color: #111111;
             }
         }
         #navigation ul {
@@ -32,10 +34,10 @@
                 font-size: 20px;
                 a {
                     text-decoration: none;
-                    color: #ffffff;
+                    color: #111111;
                     padding-bottom: 4px;
                     &:hover {
-                        border-bottom: 2px solid #ffffff;
+                        border-bottom: 2px solid #111111;
                         transition: 0.8s;
                     }
                 }
