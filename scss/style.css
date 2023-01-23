@@ -107,6 +107,9 @@
 .listing-v1 [class*=v1-slot] {
   position: relative;
 }
+.listing-v1 [class*=v1-slot]:hover {
+  opacity: 0.8;
+}
 .listing-v1 [class*=v1-slot] .text-slot {
   position: absolute;
   bottom: 16px;
