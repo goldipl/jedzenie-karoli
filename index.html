@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jedzenie Karoli</title>
-    <link rel="stylesheet" href="./scss/style.css">
-</head>
-<body>
-    <header id="header">
-        <div class="header_container">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Jedzenie Karoli</title>
+      <!-- Swiper CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+      <link rel="stylesheet" href="./scss/style.css">
+   </head>
+   <body>
+      <header id="header">
+         <div class="header_container">
             <div id="logo"><a href="./index.html">Jedzenie Karoli</a></div>
             <nav id="navigation">
-                <ul>
-                    <li><a href="#">Strona główna</a</li>
-                    <li><a href="#about_me">O mnie</a></li>
-                    <li><a href="#recipes">Przepisy</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
-                </ul>
+               <ul>
+                  <li><a href="#">Strona główna</a></li>
+                  <li><a href="#about_me">O mnie</a></li>
+                  <li><a href="#recipes">Przepisy</a></li>
+                  <li><a href="#contact">Kontakt</a></li>
+               </ul>
             </nav>
-        </div>
-    </header>
-    <section id="hero">
-        <div class="hero_img"></div>
-    </section>
-    <section id="about_me"></section>
-    <section id="recipes"></section>
-    <section id="contact"></section>
-    
-    <script src="./js/script.js"></script>
-</body>
+         </div>
+      </header>
+      <section id="swiper">
+         <!-- Swiper -->
+         <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+               <div class="swiper-slide">Slide 1</div>
+               <div class="swiper-slide">Slide 2</div>
+               <div class="swiper-slide">Slide 3</div>
+               <div class="swiper-slide">Slide 4</div>
+               <div class="swiper-slide">Slide 5</div>
+               <div class="swiper-slide">Slide 6</div>
+               <div class="swiper-slide">Slide 7</div>
+               <div class="swiper-slide">Slide 8</div>
+               <div class="swiper-slide">Slide 9</div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+         </div>
+      </section>
+      <section id="about_me"></section>
+      <section id="recipes"></section>
+      <section id="contact"></section>
+      <!-- Swiper JS -->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+      <script src="./js/swiper.js"></script>
+      <script src="./js/script.js"></script>
+   </body>
 </html>
