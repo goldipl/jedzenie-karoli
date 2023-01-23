@@ -74,7 +74,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(187, 187, 187, 0.3960784314);
+  background-color: rgba(187, 187, 187, 0.6235294118);
 }
 .swiper-slide .swiper-description-slot h2,
 .swiper-slide .swiper-description-slot p {
@@ -98,11 +98,28 @@
 .listing-v1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 16px;
-  grid-row-gap: 0px;
+  grid-row-gap: 16px;
   width: 80vw;
   margin: 0 auto;
+}
+.listing-v1 [class*=v1-slot] {
+  position: relative;
+}
+.listing-v1 [class*=v1-slot] .text-slot {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  background-color: rgba(187, 187, 187, 0.6235294118);
+}
+.listing-v1 [class*=v1-slot] .text-slot p {
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 2px 2px #111111;
+  width: auto;
+  margin: 16px auto;
 }
 
 .v1-slot01 {
@@ -134,7 +151,11 @@
   height: 400px;
 }
 
-.listing-v1 img {
+.listing-v1 img,
+.listing-v1 .v1-slot03,
+.listing-v1 .v1-slot04,
+.listing-v1 .v1-slot05,
+.listing-v1 .v1-slot06 {
   width: 100%;
   height: 200px;
   -o-object-fit: cover;
