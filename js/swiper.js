@@ -1,8 +1,7 @@
 /* MIT License */
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3,
-    spaceBetween: 10,
-    slidesPerGroup: 3,
+    spaceBetween: 25,
     loop: true,
     loopFillGroupWithBlank: true,
     pagination: {
