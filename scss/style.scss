@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import 'header';
 @import 'swiper';
+@import 'listings';
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -19,7 +20,7 @@ h1 {
     text-align: center;
 }
 
-p {
+section > p {
     width: 80vw;
     margin: 24px auto;
     font-size: 20px;
