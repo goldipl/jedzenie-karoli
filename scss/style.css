@@ -49,7 +49,7 @@
 }
 
 .swiper {
-  width: 100%;
+  width: 80vw;
   height: 100%;
 }
 
@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 600px;
+  height: 480px;
   box-shadow: 2px 2px 16px -8px #bbbbbb;
   margin: 8px;
 }
@@ -81,6 +81,8 @@
   color: #ffffff;
   text-align: center;
   text-shadow: 2px 2px #111111;
+  width: auto;
+  margin: 16px auto;
 }
 
 .swiper-button-next:after,
@@ -94,6 +96,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -101,4 +104,15 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: "Rock Salt", cursive;
+  text-align: center;
+}
+
+p {
+  width: 80vw;
+  margin: 24px auto;
+  font-size: 20px;
 }/*# sourceMappingURL=style.css.map */
