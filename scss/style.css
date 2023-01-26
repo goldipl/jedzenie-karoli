@@ -48,6 +48,21 @@
   transition: 0.8s;
 }
 
+@media (max-width: 1000px) {
+  #header {
+    height: auto;
+  }
+  #header .header_container {
+    flex-direction: column;
+  }
+  #header .header_container #navigation ul {
+    flex-direction: column;
+    padding: 0;
+  }
+  #header .header_container #navigation ul li {
+    padding: 16px 0;
+  }
+}
 .swiper {
   width: 80vw;
   height: 100%;
