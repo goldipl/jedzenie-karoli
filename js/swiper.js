@@ -1,7 +1,7 @@
 /* MIT License */
 var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 3,
-    spaceBetween: 25,
+    slidesPerView: 1,
+    spaceBetween: 10,
     loop: true,
     loopFillGroupWithBlank: true,
     pagination: {
@@ -15,4 +15,14 @@ var swiper = new Swiper(".mySwiper", {
     autoplay: {
         delay: 3000,
     },
+    breakpoints: {
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 10
+      },
+      1000: {
+        slidesPerView: 3,
+        spaceBetween: 25
+      }
+    }
 });
