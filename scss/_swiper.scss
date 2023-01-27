@@ -43,3 +43,17 @@
 .swiper-pagination-bullet-active {
     background-color: #111111;
 }
+
+@media (max-width: 600px) {
+    .swiper-description-slot {
+        h2 {
+            font-size: 16px;
+        }
+        p {
+            font-size: 13px;
+        }
+    }
+    .swiper-slide .swiper-image-slot img {
+        height: 360px;
+    }
+}

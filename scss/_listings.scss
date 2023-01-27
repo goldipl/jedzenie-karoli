@@ -50,3 +50,31 @@
     height: 200px;
     object-fit: cover;
 }
+
+@media (max-width: 1000px) {
+    .listing-v1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .listing-v1 [class*="v1-slot"],
+    .listing-v1 img {
+        height: 400px;
+    }
+    .v1-slot01 { grid-area: 1 / 1 / 2 / 2; }
+    .v1-slot02 { grid-area: 1 / 2 / 2 / 3; }
+    .v1-slot03 { grid-area: 2 / 1 / 3 / 2; }
+    .v1-slot04 { grid-area: 2 / 2 / 3 / 3; }
+    .v1-slot05 { grid-area: 3 / 1 / 4 / 2; }
+    .v1-slot06 { grid-area: 3 / 2 / 4 / 3; }
+}
+
+@media (max-width: 600px) {
+    .listing-v1 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .v1-slot01 { grid-area: 1 / 1 / 2 / 2; }
+    .v1-slot02 { grid-area: 2 / 1 / 3 / 2; }
+    .v1-slot03 { grid-area: 3 / 1 / 4 / 2; }
+    .v1-slot04 { grid-area: 4 / 1 / 5 / 2; }
+    .v1-slot05 { grid-area: 5 / 1 / 6 / 2; }
+    .v1-slot06 { grid-area: 6 / 1 / 7 / 2; }
+}

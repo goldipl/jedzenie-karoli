@@ -25,3 +25,10 @@ section > p {
     margin: 24px auto;
     font-size: 20px;
 }
+
+@media (max-width: 600px) {
+    section > p {
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
