@@ -95,6 +95,7 @@
   height: 480px;
   box-shadow: 2px 2px 16px -8px #bbbbbb;
   margin: 8px;
+  height: inherit;
 }
 .swiper-slide .swiper-image-slot img {
   display: block;
