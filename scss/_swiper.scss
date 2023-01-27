@@ -45,6 +45,9 @@
 }
 
 @media (max-width: 600px) {
+    .swiper {
+        width: 85vw;
+    }
     .swiper-description-slot {
         h2 {
             font-size: 16px;

@@ -130,6 +130,9 @@
 }
 
 @media (max-width: 600px) {
+  .swiper {
+    width: 85vw;
+  }
   .swiper-description-slot h2 {
     font-size: 16px;
   }
@@ -241,6 +244,7 @@
 @media (max-width: 600px) {
   .listing-v1 {
     grid-template-columns: repeat(1, 1fr);
+    width: 85vw;
   }
   .v1-slot01 {
     grid-area: 1/1/2/2;
@@ -286,6 +290,8 @@ section > p {
 
 @media (max-width: 600px) {
   section > p {
+    width: 85vw;
+    margin: 0 auto;
     font-size: 16px;
     line-height: 18px;
   }
