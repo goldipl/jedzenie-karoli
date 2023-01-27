@@ -17,16 +17,19 @@
   align-items: center;
   width: 1200px;
 }
-#header .header_container #logo {
+#header .header_container .logo_burger #logo {
   font-family: "Rock Salt", cursive;
   display: flex;
   flex-direction: row;
   align-items: center;
   font-size: 28px;
 }
-#header .header_container #logo a {
+#header .header_container .logo_burger #logo a {
   text-decoration: none;
   color: #111111;
+}
+#header .header_container .logo_burger .burger {
+  display: none;
 }
 #header .header_container #navigation ul {
   display: flex;
@@ -54,6 +57,22 @@
   }
   #header .header_container {
     flex-direction: column;
+  }
+  #header .header_container .logo_burger {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  #header .header_container .logo_burger .burger {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+  }
+  #header .header_container #navigation {
+    display: none;
+  }
+  #header .header_container #navigation.show {
+    display: flex;
   }
   #header .header_container #navigation ul {
     flex-direction: column;

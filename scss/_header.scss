@@ -13,15 +13,20 @@
         justify-content: space-evenly;
         align-items: center;
         width: 1200px;
-        #logo {
-            font-family: 'Rock Salt', cursive;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            font-size: 28px;
-            a {
-                text-decoration: none;
-                color: #111111;
+        .logo_burger {
+            #logo {
+                font-family: 'Rock Salt', cursive;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                font-size: 28px;
+                a {
+                    text-decoration: none;
+                    color: #111111;
+                }
+            }
+            .burger {
+                display: none;
             }
         }
         #navigation ul {
@@ -51,11 +56,27 @@
         height: auto;
         .header_container {
             flex-direction: column;
-            #navigation ul {
+            .logo_burger {
+                display: flex;
+                justify-content: space-evenly;
+                width: 100%;
+                .burger {
+                    display: flex;
+                    align-items: center;
+                    font-size: 40px;
+                }
+            }
+            #navigation {
+                display: none;
+                &.show {
+                    display: flex;
+                }
+                ul {
                 flex-direction: column;
                 padding: 0;
-                li {
-                    padding: 16px 0;
+                    li {
+                        padding: 16px 0;
+                    }
                 }
             }
         }
