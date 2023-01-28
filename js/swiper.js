@@ -2,6 +2,7 @@
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
     spaceBetween: 10,
+    centeredSlides: true,
     loop: true,
     loopFillGroupWithBlank: true,
     pagination: {
@@ -14,6 +15,7 @@ var swiper = new Swiper(".mySwiper", {
     },
     autoplay: {
         delay: 3000,
+        disableOnInteraction: false,
     },
     breakpoints: {
       320: {
