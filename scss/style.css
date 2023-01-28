@@ -328,7 +328,7 @@ section > p {
 @media (max-width: 600px) {
   section > p {
     width: 85vw;
-    margin: 0 auto;
+    margin: 16px auto;
     font-size: 16px;
     line-height: 18px;
   }
