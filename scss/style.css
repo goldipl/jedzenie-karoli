@@ -158,6 +158,7 @@
 .swiper-button-next:after,
 .swiper-button-prev:after {
   color: #111111;
+  text-shadow: 0 0 8px #87d12f;
 }
 
 .swiper-pagination-bullet-active {
