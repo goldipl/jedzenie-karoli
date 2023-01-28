@@ -61,9 +61,28 @@
                 justify-content: space-evenly;
                 width: 100%;
                 .burger {
+                    position: relative;
                     display: flex;
                     align-items: center;
                     font-size: 40px;
+                    margin-top: -12px;
+                    &.bx-x {
+                        font-size: 48px;
+                        margin-top: 0;
+                        animation: x-rotate 1.5s ease-in-out;
+                        &::after {
+                            display: none;
+                        }
+                    }
+                    &::after {
+                        font-family: "Questrial", sans-serif;
+                        content: 'MENU';
+                        display: block;
+                        position: absolute;
+                        bottom: 12px;
+                        left: 8px;
+                        font-size: 10px;
+                    }
                 }
             }
             #navigation {
@@ -80,5 +99,14 @@
                 }
             }
         }
+    }
+}
+
+@keyframes x-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

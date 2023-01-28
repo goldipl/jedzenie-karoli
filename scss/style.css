@@ -64,9 +64,29 @@
     width: 100%;
   }
   #header .header_container .logo_burger .burger {
+    position: relative;
     display: flex;
     align-items: center;
     font-size: 40px;
+    margin-top: -12px;
+  }
+  #header .header_container .logo_burger .burger.bx-x {
+    font-size: 48px;
+    margin-top: 0;
+    -webkit-animation: x-rotate 1.5s ease-in-out;
+            animation: x-rotate 1.5s ease-in-out;
+  }
+  #header .header_container .logo_burger .burger.bx-x::after {
+    display: none;
+  }
+  #header .header_container .logo_burger .burger::after {
+    font-family: "Questrial", sans-serif;
+    content: "MENU";
+    display: block;
+    position: absolute;
+    bottom: 12px;
+    left: 8px;
+    font-size: 10px;
   }
   #header .header_container #navigation {
     display: none;
@@ -80,6 +100,22 @@
   }
   #header .header_container #navigation ul li {
     padding: 16px 0;
+  }
+}
+@-webkit-keyframes x-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes x-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 .swiper {
