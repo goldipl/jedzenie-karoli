@@ -160,7 +160,7 @@
 }
 
 .swiper-horizontal > .swiper-pagination-bullets {
-  bottom: -16px;
+  bottom: 0;
 }
 
 .swiper-button-next:after,
