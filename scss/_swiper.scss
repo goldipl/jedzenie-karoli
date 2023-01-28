@@ -1,6 +1,7 @@
 .swiper {
     width: 70vw;
     height: 100%;
+    overflow:unset;
 }
   
 .swiper-slide {
@@ -37,6 +38,10 @@
     }
 }
   
+.swiper-horizontal>.swiper-pagination-bullets {
+    bottom: -16px; 
+}
+
 .swiper-button-next:after,
 .swiper-button-prev:after {
     color: #111111;

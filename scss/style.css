@@ -121,6 +121,7 @@
 .swiper {
   width: 70vw;
   height: 100%;
+  overflow: unset;
 }
 
 .swiper-slide {
@@ -156,6 +157,10 @@
   text-shadow: 2px 2px #111111;
   width: auto;
   margin: 16px auto;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets {
+  bottom: -16px;
 }
 
 .swiper-button-next:after,
