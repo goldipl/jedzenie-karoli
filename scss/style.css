@@ -301,6 +301,18 @@
     grid-area: 6/1/7/2;
   }
 }
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 16px -4px #888888;
+}
+#footer p {
+  color: #111111;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
