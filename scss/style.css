@@ -139,6 +139,9 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
+.swiper-slide .swiper-image-slot img:hover {
+  filter: brightness(75%);
+}
 .swiper-slide .swiper-description-slot {
   position: absolute;
   bottom: 0;
@@ -193,7 +196,7 @@
   position: relative;
 }
 .listing-v1 [class*=v1-slot]:hover {
-  opacity: 0.8;
+  filter: brightness(75%);
 }
 .listing-v1 [class*=v1-slot] .text-slot {
   position: absolute;

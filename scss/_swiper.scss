@@ -16,6 +16,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      &:hover {
+        filter: brightness(75%);
+      }
     }
     .swiper-description-slot {
         position: absolute;
