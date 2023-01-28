@@ -11,6 +11,7 @@ burger.addEventListener('click', () => {
 nav_el.forEach(e => {
     e.addEventListener('click', () => {
         nav.classList.remove('show');
+        burger.classList.toggle('bx-x');
     });
 });
 
