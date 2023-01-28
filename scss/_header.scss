@@ -56,9 +56,10 @@
         height: auto;
         .header_container {
             flex-direction: column;
+            margin: auto 16px;
             .logo_burger {
                 display: flex;
-                justify-content: space-evenly;
+                justify-content: space-between;
                 width: 100%;
                 .burger {
                     position: relative;
@@ -96,6 +97,26 @@
                     li {
                         padding: 16px 0;
                     }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 340px) {
+    #header {
+        .header_container {
+            .logo_burger {
+                .burger {
+                    margin-top: -6px;
+                    &::after {
+                        bottom: 4px;
+                    }
+                }
+            }
+            #logo {
+                a {
+                    font-size: 20px;
                 }
             }
         }

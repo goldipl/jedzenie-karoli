@@ -57,10 +57,11 @@
   }
   #header .header_container {
     flex-direction: column;
+    margin: auto 16px;
   }
   #header .header_container .logo_burger {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 100%;
   }
   #header .header_container .logo_burger .burger {
@@ -100,6 +101,17 @@
   }
   #header .header_container #navigation ul li {
     padding: 16px 0;
+  }
+}
+@media (max-width: 340px) {
+  #header .header_container .logo_burger .burger {
+    margin-top: -6px;
+  }
+  #header .header_container .logo_burger .burger::after {
+    bottom: 4px;
+  }
+  #header .header_container #logo a {
+    font-size: 20px;
   }
 }
 @-webkit-keyframes x-rotate {
