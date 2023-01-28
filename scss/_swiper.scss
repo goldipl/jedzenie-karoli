@@ -10,7 +10,6 @@
     justify-content: center;
     height: 480px;
     box-shadow: 2px 2px 16px -8px #bbbbbb;
-    margin: 8px;
     height: inherit;
     .swiper-image-slot img {
       display: block;
@@ -46,7 +45,7 @@
 
 @media (max-width: 600px) {
     .swiper {
-        width: 85vw;
+        width: 100vw;
     }
     .swiper-description-slot {
         h2 {
