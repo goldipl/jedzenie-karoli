@@ -45,11 +45,21 @@
 .swiper-button-next:after,
 .swiper-button-prev:after {
     color: #111111;
-    text-shadow: 0 0 8px #87d12f;
+    background: #FFFFFF;
+    padding: 12px 8px;
+    font-size: 24px;
 }
   
 .swiper-pagination-bullet-active {
     background-color: #111111;
+}
+
+.swiper-button-next {
+	right: 0 !important;
+}
+
+.swiper-button-prev {
+	left: 0 !important;
 }
 
 @media (max-width: 600px) {
