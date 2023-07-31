@@ -1,28 +1,44 @@
 #header {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
-    color: #111111;
+    background: linear-gradient(45deg, #1b1b1b, #424242);
     height: 80px;
-    width: 100vw;
-    box-shadow: 0 2px 16px -8px #888888;
-    margin-bottom: 16px;
+    width: 100%;
+    box-shadow: 0 2px 16px -2px #888888;
+    z-index: 999999999;
     .header_container {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
         width: 1200px;
         .logo_burger {
             #logo {
+                position: relative;
                 font-family: 'Rock Salt', cursive;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 font-size: 28px;
+                .bx-bowl-hot {
+                    color: #ebc51d;
+                    font-size: 52px;
+                    margin-right: 8px;
+                }
                 a {
                     text-decoration: none;
-                    color: #111111;
+                    color: #FFFFFF;
+                    span {
+                        font-family: "Questrial", sans-serif;
+                        font-size: 14px;
+                        position: absolute;
+                        bottom: 0;
+                        right: -24px;
+                        color: #ebc51d;
+                    }
                 }
             }
             .burger {
@@ -38,12 +54,18 @@
                 margin: 0 16px;
                 font-size: 20px;
                 a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid #ebc51d;
                     text-decoration: none;
-                    color: #111111;
-                    padding-bottom: 4px;
+                    color: #FFFFFF;
+                    padding: 12px;
+                    transition: 0.4s;
+                    border-radius: 6px;
                     &:hover {
-                        border-bottom: 2px solid #111111;
-                        transition: 0.8s;
+                        background-color: #ebc51d;
+                        color: #1b1b1b;
                     }
                 }
             }
@@ -53,10 +75,12 @@
 
 @media (max-width: 1000px) {
     #header {
-        height: auto;
+        height: 48px;
         .header_container {
+            background: linear-gradient(45deg, #1b1b1b, #424242);
             flex-direction: column;
-            margin: auto 16px;
+            margin: auto;
+            padding: 0 4px;
             .logo_burger {
                 display: flex;
                 justify-content: space-between;
@@ -68,6 +92,7 @@
                     font-size: 40px;
                     margin-top: -12px;
                     cursor: pointer;
+                    color: #ebc51d;
                     &.bx-x {
                         font-size: 48px;
                         margin-top: 0;
@@ -84,6 +109,7 @@
                         bottom: 12px;
                         left: 8px;
                         font-size: 10px;
+                        color: #FFFFFF;
                     }
                 }
             }
@@ -104,7 +130,7 @@
     }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 440px) {
     #header {
         .header_container {
             .logo_burger {
@@ -116,6 +142,9 @@
                 }
             }
             #logo {
+                .bx-bowl-hot {
+                    font-size: 36px !important;
+                }
                 a {
                     font-size: 20px;
                 }

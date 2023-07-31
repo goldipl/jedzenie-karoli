@@ -14,25 +14,51 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    margin-top: 96px;
 }
 
 h1 {
     font-family: 'Rock Salt', cursive;
     text-align: center;
+    span {
+        color: #ebc51d;
+    }
 }
 
-section > p {
-    width: 70vw;
-    margin: 24px auto;
-    font-size: 20px;
-    text-align: justify;
+section:not(#swiper) {
+    padding: 56px 0;
+    & > p {
+        width: 70vw;
+        margin: 24px auto;
+        font-size: 20px;
+        text-align: justify;
+    }
+    &:nth-child(even) {
+        background: linear-gradient(45deg, #1b1b1b, #424242);
+        h1 {
+            color: #FFFFFF;
+        }
+    }
 }
-
+@media (max-width: 1000px) {
+    body {
+        margin-top: 64px;
+    }
+}
 @media (max-width: 600px) {
-    section > p {
-        width: 85vw;
-        margin: 16px auto;
-        font-size: 16px;
-        line-height: 18px;
+    section:not(#swiper) {
+        padding: 24px 0;
+        & > p {
+            width: 85vw;
+            margin: 16px auto;
+            font-size: 16px;
+            line-height: 18px;
+        }
+        &:nth-child(even) {
+            background: linear-gradient(45deg, #1b1b1b, #424242);
+            h1 {
+                color: #FFFFFF;
+            }
+        }
     }
 }
