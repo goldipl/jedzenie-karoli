@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 28px;
+  font-size: 22px;
 }
 #header .header_container .logo_burger #logo .bx-bowl-hot {
   color: #ebc51d;
@@ -40,7 +40,7 @@
   font-family: "Questrial", sans-serif;
   font-size: 14px;
   position: absolute;
-  bottom: 0;
+  bottom: -3px;
   right: -24px;
   color: #ebc51d;
 }
@@ -74,9 +74,6 @@
 }
 
 @media (max-width: 1000px) {
-  #header {
-    height: 48px;
-  }
   #header .header_container {
     background: linear-gradient(45deg, #1b1b1b, #424242);
     flex-direction: column;
@@ -93,7 +90,7 @@
     display: flex;
     align-items: center;
     font-size: 40px;
-    margin-top: -12px;
+    margin-top: -6px;
     cursor: pointer;
     color: #ebc51d;
   }
@@ -110,7 +107,7 @@
     content: "MENU";
     display: block;
     position: absolute;
-    bottom: 12px;
+    bottom: -2px;
     left: 8px;
     font-size: 10px;
     color: #FFFFFF;
@@ -130,17 +127,20 @@
   }
 }
 @media (max-width: 440px) {
+  #header {
+    height: 48px;
+  }
   #header .header_container .logo_burger .burger {
     margin-top: -6px;
   }
   #header .header_container .logo_burger .burger::after {
-    bottom: 4px;
+    bottom: -2px;
   }
   #header .header_container #logo .bx-bowl-hot {
     font-size: 36px !important;
   }
   #header .header_container #logo a {
-    font-size: 20px;
+    font-size: 16px;
   }
   #header .header_container #logo a span {
     font-size: 12px !important;
