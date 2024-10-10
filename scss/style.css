@@ -34,7 +34,7 @@
 }
 #header .header_container .logo_burger #logo a {
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 #header .header_container .logo_burger #logo a span {
   font-family: "Questrial", sans-serif;
@@ -63,7 +63,7 @@
   align-items: center;
   border: 1px solid #ebc51d;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 12px;
   transition: 0.4s;
   border-radius: 6px;
@@ -79,11 +79,15 @@
     flex-direction: column;
     margin: auto;
     padding: 0 4px;
+    width: 100%;
   }
   #header .header_container .logo_burger {
     display: flex;
     justify-content: space-between;
     width: 100%;
+  }
+  #header .header_container .logo_burger #logo {
+    height: auto;
   }
   #header .header_container .logo_burger .burger {
     position: relative;
@@ -110,7 +114,7 @@
     bottom: -2px;
     left: 8px;
     font-size: 10px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
   #header .header_container #navigation {
     display: none;
