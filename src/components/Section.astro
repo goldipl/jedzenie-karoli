@@ -1,0 +1,64 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  tone?: 'light' | 'dark';
+}
+
+const { id, title, tone = 'light' } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section {id} class:list={['section', `section--${tone}`]} aria-labelledby={headingId}>
+  <h2 id={headingId} class="section__title">
+    <span aria-hidden="true">-</span>
+    {title}
+    <span aria-hidden="true">-</span>
+  </h2>
+  <slot />
+</section>
+
+<style lang="scss">
+  @use '../styles/mixins' as *;
+
+  .section {
+    padding-block: 3.5rem;
+
+    @include below($bp-sm) {
+      padding-block: 1.5rem;
+    }
+
+    > :global(p) {
+      width: var(--content-width);
+      margin: 1.5rem auto;
+      font-size: 1.25rem;
+      text-align: justify;
+      hyphens: auto;
+
+      @include below($bp-sm) {
+        margin-block: 1rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .section--dark {
+    background: var(--gradient-dark);
+    color: var(--color-light);
+  }
+
+  .section__title {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 0 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 400;
+    text-align: center;
+
+    span {
+      color: var(--color-accent);
+    }
+  }
+</style>

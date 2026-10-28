@@ -1,0 +1,56 @@
+[
+  {
+    "id": "slajd-1",
+    "title": "Tytuł slajdu 1",
+    "description": "Slide 1 jakiś randomowy opis",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Zdjęcie potrawy bezglutenowej",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 1
+  },
+  {
+    "id": "slajd-2",
+    "title": "Tytuł slajdu 2",
+    "description": "Slide 2 jakiś randomowy opis",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Zdjęcie potrawy bezglutenowej",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 2
+  },
+  {
+    "id": "slajd-3",
+    "title": "Tytuł slajdu 3",
+    "description": "Slide 3 jakiś randomowy opis",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Zdjęcie potrawy bezglutenowej",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 3
+  },
+  {
+    "id": "slajd-4",
+    "title": "Tytuł slajdu 4",
+    "description": "Slide 4 jakiś randomowy opis",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Zdjęcie potrawy bezglutenowej",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 4
+  },
+  {
+    "id": "slajd-5",
+    "title": "Tytuł slajdu 5",
+    "description": "Slide 5 jakiś randomowy opis",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Zdjęcie potrawy bezglutenowej",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 5
+  },
+  {
+    "id": "slajd-6",
+    "title": "Tytuł slajdu 6",
+    "description": "Slide 6 jakiś randomowy opis",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Zdjęcie potrawy bezglutenowej",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 6
+  }
+]

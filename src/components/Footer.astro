@@ -1,0 +1,48 @@
+---
+import Icon from './Icon.astro';
+import { site } from '@/data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <p>{site.copyright} &copy; <span data-year>{year}</span></p>
+  <a class="footer__social" href={site.instagram} target="_blank" rel="noopener noreferrer">
+    <Icon name="instagram" size={20} />
+    <span class="visually-hidden">Instagram (otwiera się w nowej karcie)</span>
+  </a>
+</footer>
+
+<script>
+  // The site is static, so refresh the year client-side in case it was built last year.
+  const year = document.querySelector('[data-year]');
+  if (year) year.textContent = String(new Date().getFullYear());
+</script>
+
+<style lang="scss">
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 3rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, var(--color-dark) 30%, var(--color-dark-2));
+    box-shadow: 0 2px 16px -4px #888;
+    color: var(--color-light);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .footer__social {
+    display: inline-flex;
+    color: var(--color-accent);
+    transition: transform var(--transition);
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+</style>

@@ -1,0 +1,209 @@
+[
+  {
+    "id": "sniadanie-01",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 1
+  },
+  {
+    "id": "sniadanie-02",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 2
+  },
+  {
+    "id": "sniadanie-03",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 3
+  },
+  {
+    "id": "sniadanie-04",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 4
+  },
+  {
+    "id": "sniadanie-05",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 5
+  },
+  {
+    "id": "sniadanie-06",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 6
+  },
+  {
+    "id": "sniadanie-07",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 7
+  },
+  {
+    "id": "sniadanie-08",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 8
+  },
+  {
+    "id": "sniadanie-09",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 9
+  },
+  {
+    "id": "sniadanie-10",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 10
+  },
+  {
+    "id": "sniadanie-11",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "sniadania",
+    "image": "../assets/food/food_01.jpg",
+    "imageAlt": "Śniadanie bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 11
+  },
+  {
+    "id": "obiad-01",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "obiady",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Obiad bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 1
+  },
+  {
+    "id": "obiad-02",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "obiady",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Obiad bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 2
+  },
+  {
+    "id": "obiad-03",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "obiady",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Obiad bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 3
+  },
+  {
+    "id": "obiad-04",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "obiady",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Obiad bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 4
+  },
+  {
+    "id": "obiad-05",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "obiady",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Obiad bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 5
+  },
+  {
+    "id": "obiad-06",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "obiady",
+    "image": "../assets/food/food_03.jpg",
+    "imageAlt": "Obiad bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 6
+  },
+  {
+    "id": "deser-01",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "desery",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Deser bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 1
+  },
+  {
+    "id": "deser-02",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "desery",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Deser bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 2
+  },
+  {
+    "id": "deser-03",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "desery",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Deser bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 3
+  },
+  {
+    "id": "deser-04",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "desery",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Deser bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 4
+  },
+  {
+    "id": "deser-05",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "desery",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Deser bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 5
+  },
+  {
+    "id": "deser-06",
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "category": "desery",
+    "image": "../assets/food/food_02.jpg",
+    "imageAlt": "Deser bez glutenu",
+    "url": "https://www.instagram.com/bezglutenowakarola",
+    "order": 6
+  }
+]

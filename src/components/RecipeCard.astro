@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  recipe: CollectionEntry<'recipes'>;
+  featured?: boolean;
+}
+
+const { recipe, featured = false } = Astro.props;
+const { title, image, imageAlt, url } = recipe.data;
+---
+
+<article class:list={['card', { 'card--featured': featured }]}>
+  <a class="card__link" href={url} target="_blank" rel="noopener noreferrer">
+    <Image
+      class="card__image"
+      src={image}
+      alt={imageAlt}
+      width={featured ? 1080 : 720}
+      widths={featured ? [480, 720, 1080] : [320, 480, 720]}
+      sizes={featured
+        ? '(max-width: 600px) 88vw, 35vw'
+        : '(max-width: 600px) 88vw, (max-width: 1000px) 35vw, 18vw'}
+    />
+    <h3 class="card__title">{title}</h3>
+  </a>
+</article>
+
+<style lang="scss">
+  @use '../styles/mixins' as *;
+
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-dark);
+    box-shadow: 0 4px 16px -8px rgb(0 0 0 / 50%);
+  }
+
+  .card__link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover :global(.card__image),
+    &:focus-visible :global(.card__image) {
+      transform: scale(1.05);
+      filter: brightness(75%);
+    }
+  }
+
+  .card :global(.card__image) {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    object-fit: cover;
+    transition:
+      transform 0.5s ease,
+      filter var(--transition);
+  }
+
+  .card__title {
+    @include overlay-caption;
+
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .card--featured .card__title {
+    font-size: 1.125rem;
+  }
+</style>
