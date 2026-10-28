@@ -1,76 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import HeroSlider from '@/components/HeroSlider.astro';
-import Section from '@/components/Section.astro';
-import RecipeGrid from '@/components/RecipeGrid.astro';
-import Icon from '@/components/Icon.astro';
-import { categories, categoryLabels } from '@/data/categories';
-import { about, contact, site } from '@/data/site';
+import Hero from '@/components/Hero.astro';
+import FeaturedSlider from '@/components/FeaturedSlider.astro';
+import Recipes from '@/components/Recipes.astro';
+import About from '@/components/About.astro';
+import Contact from '@/components/Contact.astro';
+import { categories, type Category } from '@/data/categories';
 
 const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
   a.data.order - b.data.order;
 
 const slides = (await getCollection('slides')).sort(byOrder);
 const recipes = (await getCollection('recipes')).sort(byOrder);
-const recipesByCategory = categories.map((category) => ({
-  category,
-  recipes: recipes.filter((recipe) => recipe.data.category === category),
-}));
+
+const counts = Object.fromEntries(
+  categories.map((category) => [category, recipes.filter((r) => r.data.category === category).length]),
+) as Record<Category, number>;
 ---
 
 <BaseLayout>
-  <HeroSlider slides={slides} />
-
-  <Section id="o-mnie" title="O mnie">
-    {about.map((paragraph) => <p>{paragraph}</p>)}
-  </Section>
-
-  <div id="przepisy">
-    {
-      recipesByCategory.map(({ category, recipes }, index) => (
-        <Section id={category} title={categoryLabels[category]} tone={index % 2 === 0 ? 'dark' : 'light'}>
-          <RecipeGrid recipes={recipes} />
-        </Section>
-      ))
-    }
-  </div>
-
-  <Section id="kontakt" title="Kontakt">
-    {contact.map((paragraph) => <p>{paragraph}</p>)}
-    <div class="cta">
-      <a class="cta__button" href={site.instagram} target="_blank" rel="noopener noreferrer">
-        <Icon name="instagram" size={22} />
-        Napisz do mnie na Instagramie
-      </a>
-    </div>
-  </Section>
+  <Hero counts={counts} />
+  <FeaturedSlider slides={slides} />
+  <Recipes recipes={recipes} />
+  <About />
+  <Contact />
 </BaseLayout>
-
-<style lang="scss">
-  .cta {
-    margin-top: 2rem;
-    text-align: center;
-  }
-
-  .cta__button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid var(--color-accent);
-    border-radius: 6px;
-    background: var(--gradient-dark);
-    color: var(--color-light);
-    text-decoration: none;
-    transition:
-      background var(--transition),
-      color var(--transition);
-
-    &:hover,
-    &:focus-visible {
-      background: var(--color-accent);
-      color: var(--color-dark);
-    }
-  }
-</style>

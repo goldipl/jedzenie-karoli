@@ -8,13 +8,23 @@ export default defineConfig({
   trailingSlash: 'ignore',
   fonts: [
     {
-      name: 'Questrial',
-      cssVariable: '--font-questrial',
+      name: 'DM Sans',
+      cssVariable: '--font-dm-sans',
       provider: fontProviders.npm(),
-      options: { package: '@fontsource/questrial' },
-      weights: [400],
+      options: { package: '@fontsource/dm-sans' },
+      weights: [400, 500, 700],
       subsets: ['latin', 'latin-ext'],
       fallbacks: ['system-ui', 'sans-serif'],
+    },
+    {
+      name: 'Fraunces',
+      cssVariable: '--font-fraunces',
+      provider: fontProviders.npm(),
+      options: { package: '@fontsource/fraunces' },
+      weights: [600, 700],
+      styles: ['normal', 'italic'],
+      subsets: ['latin', 'latin-ext'],
+      fallbacks: ['Georgia', 'serif'],
     },
     {
       name: 'Rock Salt',

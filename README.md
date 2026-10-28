@@ -1,4 +1,4 @@
-# #BezglutenowaKarola
+# Jedzenie Karoli
 
 Strona z przepisami bez glutenu – śniadania, obiady i desery.
 
@@ -6,12 +6,12 @@ Strona z przepisami bez glutenu – śniadania, obiady i desery.
 https://goldipl.github.io/jedzenie-karoli/
 
 ## Technologie
-* [Astro](https://astro.build) 7 – statyczna strona, zero JS poza sliderem i menu
+* [Astro](https://astro.build) 7 – statyczna strona, minimalna ilość JS (menu, slider, filtry przepisów)
 * TypeScript (strict)
 * SCSS (style scoped w komponentach)
 * [Swiper](https://swiperjs.com) – slider polecanych przepisów
 * `astro:assets` – automatyczna optymalizacja zdjęć (WebP, `srcset`)
-* Astro Fonts API – samohostowane fonty Questrial i Rock Salt
+* Astro Fonts API – samohostowane fonty Fraunces (nagłówki), DM Sans (tekst) i Rock Salt (logo)
 * GitHub Actions → GitHub Pages
 
 ## Uruchomienie
@@ -22,6 +22,7 @@ npm install
 npm run dev      # serwer deweloperski: http://localhost:4321/jedzenie-karoli
 npm run build    # astro check + build do ./dist
 npm run preview  # podgląd zbudowanej strony
+npm run icons    # wygeneruj favicony i ikony iOS/Android do ./public
 ```
 
 ## Struktura
@@ -29,15 +30,16 @@ npm run preview  # podgląd zbudowanej strony
 ```text
 src/
 ├── assets/food/         # zdjęcia (optymalizowane przy buildzie)
-├── components/          # Header, HeroSlider, Section, RecipeGrid, RecipeCard, Footer, Icon
+├── components/          # Header, Hero, FeaturedSlider, Recipes, RecipeCard, About, Contact, Footer, Icon
 ├── content/
 │   ├── recipes.json     # przepisy (kategoria, tytuł, zdjęcie, link)
 │   └── slides.json      # slajdy w sliderze
 ├── content.config.ts    # schematy kolekcji (walidacja danych)
-├── data/                # dane strony: nawigacja, teksty, kategorie
+├── data/site.ts         # teksty: hero, O mnie, Kontakt, linki, nawigacja
+├── data/categories.ts   # kategorie przepisów
 ├── layouts/BaseLayout.astro
 ├── pages/index.astro
-└── styles/              # style globalne, zmienne CSS, mixiny SCSS
+└── styles/              # paleta (zmienne CSS), przyciski, typografia, mixiny SCSS
 ```
 
 ## Dodawanie przepisu
@@ -55,4 +57,10 @@ Dodaj wpis do `src/content/recipes.json`, np.:
 }
 ```
 
-Dostępne kategorie: `sniadania`, `obiady`, `desery`. Pierwsze dwa przepisy w każdej kategorii są wyświetlane jako duże kafelki.
+Dostępne kategorie: `sniadania`, `obiady`, `desery`. Przepisy można filtrować po kategorii; domyślnie widać 8, resztę odsłania „Pokaż więcej”.
+
+## Edycja treści
+Teksty sekcji (hero, O mnie, Kontakt) są w `src/data/site.ts`. Aby w sekcji Kontakt pojawiła się karta e-mail, uzupełnij pole `email`.
+
+## Kolorystyka
+Paleta jest zdefiniowana jako zmienne CSS w `src/styles/global.scss` (`--orange-50` … `--orange-800`, `--brown-*`). Kolor główny to `--color-primary`.

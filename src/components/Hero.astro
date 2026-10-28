@@ -1,0 +1,298 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import heroMain from '@/assets/food/food_03.jpg';
+import heroSmall from '@/assets/food/food_02.jpg';
+import { categoryLabels, type Category } from '@/data/categories';
+import { hero, site } from '@/data/site';
+
+interface Props {
+  counts: Record<Category, number>;
+}
+
+const { counts } = Astro.props;
+---
+
+<section id="start" class="hero">
+  <div class="hero__inner container">
+    <div class="hero__content">
+      <p class="hero__pill">
+        <Icon name="leaf" size={16} />
+        {hero.eyebrow}
+      </p>
+      <h1 class="hero__title">
+        {hero.title[0]}
+        <span class="text-accent">{hero.title[1]}</span>
+      </h1>
+      <p class="hero__lead">{hero.lead}</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#przepisy">
+          Zobacz przepisy
+          <Icon name="arrowLong" size={18} />
+        </a>
+        <a class="btn btn--ghost" href="#o-mnie">Poznaj mnie</a>
+      </div>
+
+      <ul class="hero__categories" aria-label="Kategorie przepisów">
+        {
+          (Object.keys(categoryLabels) as Category[]).map((category) => (
+            <li>
+              <a href="#przepisy" data-filter-link={category}>
+                {categoryLabels[category]}
+                <span>{counts[category]}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hero__media" aria-hidden="true">
+      <div class="hero__blob"></div>
+      <Image
+        class="hero__img hero__img--main"
+        src={heroMain}
+        alt=""
+        width={720}
+        widths={[400, 560, 720]}
+        sizes="(max-width: 960px) 80vw, 460px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <Image
+        class="hero__img hero__img--small"
+        src={heroSmall}
+        alt=""
+        width={360}
+        widths={[200, 360]}
+        sizes="180px"
+        loading="eager"
+      />
+      <div class="hero__badge hero__badge--top">
+        <span class="hero__badge-icon"><Icon name="heart" size={18} /></span>
+        <span><strong>Gluten free</strong><br />i pełne smaku</span>
+      </div>
+      <div class="hero__badge hero__badge--bottom">
+        <span class="hero__badge-icon"><Icon name="instagram" size={18} /></span>
+        <span>{site.instagramHandle}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/mixins' as *;
+
+  .hero {
+    position: relative;
+    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
+    overflow: clip;
+    background:
+      radial-gradient(60rem 40rem at 100% 0%, var(--orange-100), transparent 60%),
+      radial-gradient(40rem 30rem at 0% 100%, rgb(255 237 213 / 60%), transparent 70%);
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+
+    @include below($bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--orange-200);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hero__title {
+    margin-top: 1.25rem;
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    line-height: 1.05;
+
+    span {
+      display: block;
+    }
+  }
+
+  .hero__lead {
+    max-width: 34rem;
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.5rem 0.375rem 0.875rem;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 70%);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition:
+        border-color var(--transition),
+        color var(--transition);
+
+      &:hover {
+        border-color: var(--orange-300);
+        color: var(--color-primary);
+      }
+    }
+
+    span {
+      min-width: 1.5rem;
+      padding: 0.0625rem 0.4375rem;
+      border-radius: 999px;
+      background: var(--orange-100);
+      color: var(--orange-800);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
+  /* Image composition */
+  .hero__media {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 460px);
+    aspect-ratio: 4 / 5;
+
+    @include below($bp-md) {
+      width: min(80%, 400px);
+      margin-top: 1rem;
+    }
+
+    @include below($bp-sm) {
+      width: 82%;
+    }
+  }
+
+  .hero__blob {
+    position: absolute;
+    inset: 8% -10% -6% 6%;
+    border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
+    background: linear-gradient(135deg, var(--orange-300), var(--orange-500));
+    opacity: 0.9;
+    animation: blob 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes blob {
+    to {
+      border-radius: 58% 42% 40% 60% / 55% 60% 40% 45%;
+      rotate: 8deg;
+    }
+  }
+
+  .hero__media :global(.hero__img) {
+    position: absolute;
+    object-fit: cover;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero__media :global(.hero__img--main) {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 200px 200px var(--radius-lg) var(--radius-lg);
+  }
+
+  .hero__media :global(.hero__img--small) {
+    left: -14%;
+    bottom: 8%;
+    width: 38%;
+    aspect-ratio: 1;
+    border: 6px solid var(--color-bg);
+    border-radius: 50%;
+  }
+
+  .hero__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.625rem 1rem 0.625rem 0.625rem;
+    border-radius: 999px;
+    background: var(--color-surface);
+    box-shadow: var(--shadow);
+    font-size: 0.875rem;
+    line-height: 1.25;
+    white-space: nowrap;
+    animation: float 6s ease-in-out infinite;
+
+    strong {
+      color: var(--color-primary);
+    }
+  }
+
+  .hero__badge--top {
+    top: 10%;
+    right: -12%;
+  }
+
+  .hero__badge--bottom {
+    right: 6%;
+    bottom: -4%;
+    font-weight: 700;
+    animation-delay: -3s;
+  }
+
+  @include below($bp-sm) {
+    .hero__badge--top {
+      right: -8%;
+    }
+
+    .hero__badge {
+      font-size: 0.8125rem;
+    }
+  }
+
+  .hero__badge-icon {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--orange-100);
+    color: var(--color-primary);
+  }
+
+  @keyframes float {
+    50% {
+      translate: 0 -8px;
+    }
+  }
+</style>

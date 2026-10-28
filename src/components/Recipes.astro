@@ -1,0 +1,208 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import RecipeCard from './RecipeCard.astro';
+import Icon from './Icon.astro';
+import { categories, categoryLabels } from '@/data/categories';
+
+interface Props {
+  recipes: CollectionEntry<'recipes'>[];
+  /** Cards visible before "Pokaż więcej" is pressed. */
+  pageSize?: number;
+}
+
+const { recipes, pageSize = 8 } = Astro.props;
+
+const filters = [
+  { value: 'all', label: 'Wszystkie', count: recipes.length },
+  ...categories.map((category) => ({
+    value: category,
+    label: categoryLabels[category],
+    count: recipes.filter((recipe) => recipe.data.category === category).length,
+  })),
+];
+---
+
+<section id="przepisy" class="recipes section" aria-labelledby="przepisy-title" data-recipes data-page-size={pageSize}>
+  <div class="container">
+    <div class="recipes__head">
+      <p class="eyebrow">Przepisy</p>
+      <h2 id="przepisy-title" class="section-title">Co dziś ugotujemy?</h2>
+      <p class="section-lead">
+        Wybierz kategorię i znajdź inspirację na każdą porę dnia. Pełne przepisy znajdziesz na moim Instagramie.
+      </p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filtruj przepisy według kategorii">
+      {
+        filters.map(({ value, label, count }) => (
+          <button
+            class="filter"
+            type="button"
+            data-filter={value}
+            aria-pressed={value === 'all' ? 'true' : 'false'}
+          >
+            {label}
+            <span class="filter__count">{count}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <p class="visually-hidden" aria-live="polite" data-status></p>
+
+    <ul class="grid" data-grid>
+      {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
+    </ul>
+
+    <div class="recipes__more">
+      <button class="btn btn--ghost" type="button" data-more hidden>
+        <span data-more-label>Pokaż więcej</span>
+        <Icon name="arrowLong" size={18} style="rotate: 90deg" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { categoryLabels, type Category } from '@/data/categories';
+
+  const root = document.querySelector<HTMLElement>('[data-recipes]')!;
+  const pageSize = Number(root.dataset.pageSize);
+  const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const cards = [...root.querySelectorAll<HTMLElement>('[data-category]')];
+  const more = root.querySelector<HTMLButtonElement>('[data-more]')!;
+  const moreLabel = more.querySelector<HTMLElement>('[data-more-label]')!;
+  const status = root.querySelector<HTMLElement>('[data-status]')!;
+
+  // Polish plural: 1 przepis, 2–4 przepisy, 5+ przepisów (but 12–14 przepisów).
+  const plural = (n: number) =>
+    n === 1 ? 'przepis' : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? 'przepisy' : 'przepisów';
+
+  let filter = 'all';
+  let expanded = false;
+
+  function render() {
+    const matching = cards.filter((card) => filter === 'all' || card.dataset.category === filter);
+    cards.forEach((card) => (card.hidden = true));
+    matching.forEach((card, index) => (card.hidden = !expanded && index >= pageSize));
+
+    const hiddenCount = matching.filter((card) => card.hidden).length;
+    more.hidden = hiddenCount === 0;
+    moreLabel.textContent = `Pokaż więcej (${hiddenCount})`;
+
+    buttons.forEach((button) =>
+      button.setAttribute('aria-pressed', String(button.dataset.filter === filter)),
+    );
+    const label = filter === 'all' ? 'Wszystkie' : categoryLabels[filter as Category];
+    status.textContent = `${label}: ${matching.length} ${plural(matching.length)}`;
+  }
+
+  function setFilter(value: string) {
+    filter = value;
+    expanded = false;
+    render();
+  }
+
+  buttons.forEach((button) => button.addEventListener('click', () => setFilter(button.dataset.filter!)));
+
+  more.addEventListener('click', () => {
+    const firstHidden = cards.find((card) => card.hidden && (filter === 'all' || card.dataset.category === filter));
+    expanded = true;
+    render();
+    firstHidden?.querySelector('a')?.focus({ preventScroll: true });
+  });
+
+  // Category shortcuts elsewhere on the page (e.g. in the hero).
+  document.querySelectorAll<HTMLAnchorElement>('[data-filter-link]').forEach((link) =>
+    link.addEventListener('click', () => setFilter(link.dataset.filterLink!)),
+  );
+
+  render();
+</script>
+
+<style lang="scss">
+  @use '../styles/mixins' as *;
+
+  .recipes {
+    background: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .recipes__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .section-lead {
+      margin-inline: auto;
+    }
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2.25rem 0 2.5rem;
+  }
+
+  .filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.625rem 0.5rem 1.125rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+
+    &:hover {
+      border-color: var(--orange-300);
+    }
+
+    &[aria-pressed='true'] {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: #fff;
+
+      .filter__count {
+        background: rgb(255 255 255 / 22%);
+        color: #fff;
+      }
+    }
+  }
+
+  .filter__count {
+    min-width: 1.75rem;
+    padding: 0.0625rem 0.5rem;
+    border-radius: 999px;
+    background: var(--orange-100);
+    color: var(--orange-800);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .recipes__more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+</style>

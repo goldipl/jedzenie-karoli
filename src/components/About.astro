@@ -1,0 +1,261 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import mainPhoto from '@/assets/food/food_02.jpg';
+import sidePhoto from '@/assets/food/food_01.jpg';
+import { about, site } from '@/data/site';
+---
+
+<section id="o-mnie" class="about section" aria-labelledby="o-mnie-title">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__media reveal">
+        <div class="about__dots" aria-hidden="true"></div>
+        <Image
+          class="about__photo about__photo--main"
+          src={mainPhoto}
+          alt="Bezglutenowe naleśniki z malinami"
+          width={720}
+          widths={[400, 560, 720]}
+          sizes="(max-width: 960px) 80vw, 440px"
+        />
+        <Image
+          class="about__photo about__photo--side"
+          src={sidePhoto}
+          alt=""
+          width={400}
+          widths={[240, 400]}
+          sizes="200px"
+        />
+        <blockquote class="about__quote">
+          <Icon name="sparkle" size={20} />
+          <p>„{about.quote}”</p>
+        </blockquote>
+      </div>
+
+      <div class="about__content reveal">
+        <p class="eyebrow">O mnie</p>
+        <h2 id="o-mnie-title" class="section-title">
+          {about.title[0]} <span class="text-accent">{about.title[1]}</span>
+        </h2>
+        <p class="about__lead">{about.lead}</p>
+        {about.paragraphs.map((paragraph) => <p class="about__text">{paragraph}</p>)}
+
+        <div class="about__footer">
+          <span class="about__signature">{about.signature}</span>
+          <a class="btn btn--primary" href={site.instagram} target="_blank" rel="noopener noreferrer">
+            <Icon name="instagram" size={18} />
+            Obserwuj mnie
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="values">
+      {
+        about.values.map(({ icon, title, text }) => (
+          <li class="value reveal">
+            <span class="value__icon">
+              <Icon name={icon} size={24} />
+            </span>
+            <h3 class="value__title">{title}</h3>
+            <p class="value__text">{text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/mixins' as *;
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    align-items: center;
+    gap: clamp(3rem, 7vw, 6rem);
+
+    @include below($bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Photo composition */
+  .about__media {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 440px);
+    aspect-ratio: 4 / 5;
+    margin-left: 1.5rem;
+
+    @include below($bp-md) {
+      width: min(78%, 380px);
+      margin-left: 0;
+    }
+  }
+
+  .about__dots {
+    position: absolute;
+    inset: -1.5rem auto auto -1.5rem;
+    width: 9rem;
+    height: 9rem;
+    background-image: radial-gradient(var(--orange-300) 2px, transparent 2.5px);
+    background-size: 16px 16px;
+  }
+
+  .about__media :global(.about__photo) {
+    position: absolute;
+    object-fit: cover;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about__media :global(.about__photo--main) {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    rotate: -2deg;
+  }
+
+  .about__media :global(.about__photo--side) {
+    right: -18%;
+    top: 12%;
+    width: 42%;
+    aspect-ratio: 3 / 4;
+    border: 6px solid #fff;
+    border-radius: var(--radius);
+    rotate: 5deg;
+
+    @include below($bp-sm) {
+      right: -12%;
+    }
+  }
+
+  .about__quote {
+    position: absolute;
+    left: -1.5rem;
+    right: 15%;
+    bottom: -1.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 1.125rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--brown-900);
+    color: #fff;
+    box-shadow: var(--shadow);
+
+    :global(svg) {
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+      color: var(--orange-400);
+    }
+
+    p {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    @include below($bp-sm) {
+      left: -0.75rem;
+      right: 5%;
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  /* Text */
+  .about__content {
+    @include below($bp-md) {
+      margin-top: 1.5rem;
+    }
+  }
+
+  .about__lead {
+    margin-top: 1.25rem;
+    font-size: clamp(1.125rem, 1.8vw, 1.3125rem);
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .about__text {
+    margin-top: 1rem;
+    color: var(--color-muted);
+  }
+
+  .about__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px dashed var(--orange-200);
+  }
+
+  .about__signature {
+    font-family: var(--font-script);
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    rotate: -4deg;
+  }
+
+  /* Values */
+  .values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: clamp(4rem, 8vw, 6rem) 0 0;
+    padding: 0;
+    list-style: none;
+
+    @include below($bp-md) {
+      grid-template-columns: 1fr;
+      max-width: 34rem;
+      margin-inline: auto;
+    }
+  }
+
+  .value {
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+  }
+
+  .value__icon {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 16px;
+    background: var(--orange-100);
+    color: var(--color-primary);
+  }
+
+  .value__title {
+    margin-top: 1.25rem;
+    font-size: 1.25rem;
+  }
+
+  .value__text {
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+  }
+</style>

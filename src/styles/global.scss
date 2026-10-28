@@ -1,32 +1,48 @@
 @use 'mixins' as *;
 
 :root {
-  --color-dark: #1b1b1b;
-  --color-dark-2: #424242;
-  --color-light: #ffffff;
-  --color-accent: #ebc51d;
-  --color-text: #1b1b1b;
-  --color-overlay: rgb(27 27 27 / 54%);
-  --gradient-dark: linear-gradient(45deg, var(--color-dark), var(--color-dark-2));
+  /* Palette – warm orange */
+  --orange-50: #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-200: #fed7aa;
+  --orange-300: #fdba74;
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+  --orange-800: #9a3412;
+  --brown-900: #2a170c;
+  --brown-800: #3d2414;
+  --brown-600: #6b4f3f;
 
-  --font-body: var(--font-questrial);
-  --font-display: var(--font-rock-salt);
+  --color-bg: #fffaf5;
+  --color-surface: #ffffff;
+  --color-text: var(--brown-900);
+  --color-muted: var(--brown-600);
+  --color-primary: var(--orange-700);
+  --color-primary-hover: var(--orange-800);
+  --color-accent: var(--orange-500);
+  --color-tint: var(--orange-100);
+  --color-border: #f3e2d3;
 
-  --header-height: 80px;
-  --radius: 8px;
-  --content-width: min(70vw, 1200px);
-  --transition: 0.3s ease;
+  --font-body: var(--font-dm-sans);
+  --font-display: var(--font-fraunces);
+  --font-script: var(--font-rock-salt);
+
+  --header-height: 72px;
+  --container: 1200px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --section-space: clamp(4rem, 9vw, 7rem);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --shadow-sm: 0 1px 2px rgb(61 36 20 / 6%), 0 2px 8px rgb(61 36 20 / 6%);
+  --shadow: 0 2px 4px rgb(61 36 20 / 6%), 0 12px 32px -8px rgb(61 36 20 / 18%);
+  --shadow-lg: 0 24px 60px -20px rgb(154 52 18 / 35%);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.25s var(--ease);
 
   color-scheme: light;
-
-  @include below($bp-md) {
-    --header-height: 64px;
-  }
-
-  @include below($bp-sm) {
-    --header-height: 56px;
-    --content-width: 88vw;
-  }
 }
 
 *,
@@ -37,8 +53,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-height);
-  overflow-x: hidden;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -50,23 +66,45 @@ html {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
 
 body {
   margin: 0;
-  padding-top: calc(var(--header-height) + 1rem);
+  overflow-x: clip;
   font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
   color: var(--color-text);
-  background: var(--color-light);
-  line-height: 1.5;
+  background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
 }
 
-img {
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+img,
+svg {
   display: block;
   max-width: 100%;
+}
+
+img {
   height: auto;
 }
 
@@ -74,9 +112,33 @@ a {
   color: inherit;
 }
 
+button {
+  font: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  background: var(--orange-200);
+  color: var(--brown-900);
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 3px solid var(--orange-400);
   outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Layout helpers */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-space);
 }
 
 .visually-hidden {
@@ -90,17 +152,141 @@ a {
 }
 
 .skip-link {
-  position: absolute;
-  top: -100px;
-  left: 1rem;
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
   z-index: 1000;
   padding: 0.75rem 1rem;
-  background: var(--color-accent);
-  color: var(--color-dark);
-  border-radius: var(--radius);
-  font-weight: bold;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  translate: 0 -200%;
+  transition: translate var(--transition);
 
   &:focus {
-    top: 1rem;
+    translate: 0 0;
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+
+  svg {
+    flex-shrink: 0;
+    transition: transform var(--transition);
+  }
+
+  &:hover svg:last-child:not(:first-child) {
+    transform: translateX(3px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgb(194 65 12 / 60%);
+
+  &:hover {
+    background: var(--color-primary-hover);
+    box-shadow: 0 12px 24px -8px rgb(194 65 12 / 70%);
+  }
+}
+
+.btn--ghost {
+  border-color: var(--orange-200);
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  &:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+}
+
+.btn--light {
+  background: #fff;
+  color: var(--orange-800);
+
+  &:hover {
+    background: var(--orange-50);
+  }
+}
+
+/* Section heading pattern */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+  color: var(--color-primary);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    width: 1.5rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+}
+
+.section-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+
+.section-lead {
+  margin-top: 1rem;
+  max-width: 60ch;
+  color: var(--color-muted);
+  font-size: 1.125rem;
+}
+
+.text-accent {
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+/* Scroll-driven reveal – pure CSS, no-op where unsupported */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        translate: 0 2rem;
+      }
+    }
   }
 }

@@ -1,0 +1,254 @@
+---
+import Icon from './Icon.astro';
+import { contact, site } from '@/data/site';
+---
+
+<section id="kontakt" class="contact section" aria-labelledby="kontakt-title">
+  <div class="container">
+    <div class="contact__panel reveal">
+      <div class="contact__intro">
+        <p class="eyebrow contact__eyebrow">Kontakt</p>
+        <h2 id="kontakt-title" class="section-title">{contact.title}</h2>
+        <p class="contact__lead">{contact.lead}</p>
+
+        <div class="contact__actions">
+          <a class="btn btn--light" href={site.instagramDm} target="_blank" rel="noopener noreferrer">
+            <Icon name="message" size={18} />
+            Napisz wiadomość
+          </a>
+          <a class="contact__handle" href={site.instagram} target="_blank" rel="noopener noreferrer">
+            <Icon name="instagram" size={20} />
+            {site.instagramHandle}
+          </a>
+        </div>
+
+        <div class="hashtag">
+          <span class="hashtag__label">Oznaczaj swoje zdjęcia:</span>
+          <button class="hashtag__copy" type="button" data-copy={site.hashtag}>
+            <span data-copy-label>{site.hashtag}</span>
+            <span class="hashtag__hint" aria-hidden="true">kopiuj</span>
+          </button>
+          <span class="visually-hidden" aria-live="polite" data-copy-status></span>
+        </div>
+      </div>
+
+      <ul class="contact__list">
+        {
+          contact.reasons.map(({ icon, title, text }) => (
+            <li class="reason">
+              <span class="reason__icon">
+                <Icon name={icon} size={22} />
+              </span>
+              <div>
+                <h3 class="reason__title">{title}</h3>
+                <p class="reason__text">{text}</p>
+              </div>
+            </li>
+          ))
+        }
+        {
+          site.email && (
+            <li class="reason">
+              <span class="reason__icon">
+                <Icon name="mail" size={22} />
+              </span>
+              <div>
+                <h3 class="reason__title">E-mail</h3>
+                <a class="reason__text" href={`mailto:${site.email}`}>
+                  {site.email}
+                </a>
+              </div>
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    const label = button.querySelector<HTMLElement>('[data-copy-label]')!;
+    const status = button.parentElement!.querySelector<HTMLElement>('[data-copy-status]')!;
+    const text = button.dataset.copy!;
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+        label.textContent = 'Skopiowano!';
+        status.textContent = `Skopiowano ${text} do schowka`;
+        button.dataset.copied = '';
+        setTimeout(() => {
+          label.textContent = text;
+          delete button.dataset.copied;
+        }, 1800);
+      } catch {
+        status.textContent = 'Nie udało się skopiować – zaznacz tekst ręcznie.';
+      }
+    });
+  });
+</script>
+
+<style lang="scss">
+  @use '../styles/mixins' as *;
+
+  .contact__panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding: clamp(2rem, 6vw, 4.5rem);
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(28rem 20rem at 100% 0%, rgb(251 146 60 / 55%), transparent 70%),
+      radial-gradient(24rem 18rem at 0% 100%, rgb(124 45 18 / 60%), transparent 70%),
+      linear-gradient(135deg, var(--orange-700), var(--orange-800));
+    color: #fff;
+    box-shadow: var(--shadow-lg);
+
+    // Decorative ring.
+    &::after {
+      content: '';
+      position: absolute;
+      right: -6rem;
+      bottom: -6rem;
+      width: 18rem;
+      height: 18rem;
+      border: 40px solid rgb(255 255 255 / 6%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @include below($bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact__eyebrow {
+    color: var(--orange-200);
+  }
+
+  .contact__lead {
+    margin-top: 1rem;
+    max-width: 32rem;
+    color: rgb(255 255 255 / 90%);
+    font-size: 1.125rem;
+  }
+
+  .contact__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .contact__handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgb(255 255 255 / 40%);
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--transition);
+
+    &:hover {
+      text-decoration-color: #fff;
+    }
+  }
+
+  .hashtag {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-top: 2.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .hashtag__label {
+    color: rgb(255 255 255 / 85%);
+  }
+
+  .hashtag__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.375rem 0.5rem 0.375rem 0.875rem;
+    border: 1px dashed rgb(255 255 255 / 55%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 8%);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color var(--transition),
+      border-color var(--transition);
+
+    &:hover,
+    &[data-copied] {
+      border-style: solid;
+      background: rgb(255 255 255 / 16%);
+    }
+  }
+
+  .hashtag__hint {
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--orange-800);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .contact__list {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 0.875rem;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reason {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 9%);
+    backdrop-filter: blur(6px);
+    transition: background-color var(--transition);
+
+    &:hover {
+      background: rgb(255 255 255 / 14%);
+    }
+  }
+
+  .reason__icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 14px;
+    background: #fff;
+    color: var(--color-primary);
+  }
+
+  .reason__title {
+    font-size: 1.125rem;
+  }
+
+  .reason__text {
+    margin-top: 0.25rem;
+    color: rgb(255 255 255 / 88%);
+    font-size: 0.9375rem;
+  }
+</style>

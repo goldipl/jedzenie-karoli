@@ -5,9 +5,9 @@ import { withBase } from '@/utils/url';
 ---
 
 <header class="header" data-header>
-  <div class="header__inner">
+  <div class="header__inner container">
     <a class="logo" href={withBase('/')} aria-label={`${site.name} – strona główna`}>
-      <Icon name="bowl" class="logo__icon" size={44} />
+      <span class="logo__badge"><Icon name="bowl" size={26} /></span>
       <span class="logo__text">
         {site.name}
         <span class="logo__tagline">{site.tagline}</span>
@@ -19,14 +19,14 @@ import { withBase } from '@/utils/url';
       type="button"
       aria-controls="main-nav"
       aria-expanded="false"
+      aria-label="Otwórz menu"
       data-burger
     >
-      <Icon name="menu" class="burger__open" size={32} />
-      <Icon name="close" class="burger__close" size={32} />
-      <span class="burger__label">Menu</span>
+      <Icon name="menu" class="burger__open" size={26} />
+      <Icon name="close" class="burger__close" size={26} />
     </button>
 
-    <nav id="main-nav" class="nav" aria-label="Główna nawigacja">
+    <nav id="main-nav" class="nav" aria-label="Główna nawigacja" data-nav>
       <ul class="nav__list">
         {
           navigation.map(({ label, href }) => (
@@ -38,49 +38,84 @@ import { withBase } from '@/utils/url';
           ))
         }
       </ul>
+      <a class="btn btn--primary nav__cta" href={site.instagram} target="_blank" rel="noopener noreferrer">
+        <Icon name="instagram" size={18} />
+        Instagram
+      </a>
     </nav>
   </div>
 </header>
 
 <script>
-  const header = document.querySelector<HTMLElement>('[data-header]');
-  const burger = header?.querySelector<HTMLButtonElement>('[data-burger]');
-  const mobileQuery = window.matchMedia('(max-width: 999.98px)');
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const burger = header.querySelector<HTMLButtonElement>('[data-burger]')!;
+  const links = [...header.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')];
 
   function setOpen(open: boolean) {
-    if (!header || !burger) return;
     header.toggleAttribute('data-open', open);
     burger.setAttribute('aria-expanded', String(open));
-    burger.querySelector('.burger__label')!.textContent = open ? 'Zamknij' : 'Menu';
+    burger.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
   }
 
-  burger?.addEventListener('click', () => setOpen(!header?.hasAttribute('data-open')));
-
-  header?.querySelectorAll('[data-nav-link]').forEach((link) =>
-    link.addEventListener('click', () => setOpen(false)),
-  );
+  burger.addEventListener('click', () => setOpen(!header.hasAttribute('data-open')));
+  header.querySelectorAll('[data-nav] a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && header?.hasAttribute('data-open')) {
+    if (event.key === 'Escape' && header.hasAttribute('data-open')) {
       setOpen(false);
-      burger?.focus();
+      burger.focus();
     }
   });
 
-  mobileQuery.addEventListener('change', () => setOpen(false));
+  document.addEventListener('click', (event) => {
+    if (header.hasAttribute('data-open') && !header.contains(event.target as Node)) setOpen(false);
+  });
+
+  window.matchMedia('(min-width: 960px)').addEventListener('change', () => setOpen(false));
+
+  // Elevate the header once the page is scrolled.
+  const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Highlight the link of the section currently in view.
+  const sections = links
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => section !== null);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((link) => {
+          if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  sections.forEach((section) => observer.observe(section));
 </script>
 
 <style lang="scss">
   @use '../styles/mixins' as *;
 
   .header {
-    position: fixed;
-    inset: 0 0 auto;
+    position: sticky;
+    top: 0;
     z-index: 100;
-    display: flex;
-    justify-content: center;
-    background: var(--gradient-dark);
-    box-shadow: 0 2px 16px -2px #888;
+    background: rgb(255 250 245 / 82%);
+    backdrop-filter: saturate(1.6) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition:
+      box-shadow var(--transition),
+      border-color var(--transition);
+
+    &[data-scrolled] {
+      border-color: var(--color-border);
+      box-shadow: 0 8px 24px -16px rgb(61 36 20 / 35%);
+    }
   }
 
   .header__inner {
@@ -88,66 +123,100 @@ import { withBase } from '@/utils/url';
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    width: min(1200px, 100%);
     height: var(--header-height);
-    padding-inline: 1rem;
   }
 
   .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--color-light);
+    gap: 0.75rem;
+    color: var(--color-text);
     text-decoration: none;
   }
 
-  .logo :global(.logo__icon) {
+  .logo__badge {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
-    color: var(--color-accent);
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--orange-400), var(--orange-600));
+    color: #fff;
+    box-shadow: 0 6px 16px -6px rgb(234 88 12 / 70%);
+    transition: transform var(--transition);
+  }
+
+  .logo:hover .logo__badge {
+    transform: rotate(-8deg) scale(1.05);
   }
 
   .logo__text {
-    position: relative;
     display: flex;
     flex-direction: column;
-    font-family: var(--font-display);
-    font-size: 1.375rem;
-    line-height: 1.3;
+    font-family: var(--font-script);
+    font-size: 1.125rem;
+    line-height: 1.4;
   }
 
   .logo__tagline {
-    align-self: flex-end;
-    margin-right: -1.5rem;
     font-family: var(--font-body);
-    font-size: 0.875rem;
-    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 
   .nav__list {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.25rem;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .nav__link {
+    position: relative;
     display: block;
-    padding: 0.625rem 0.875rem;
-    border: 1px solid var(--color-accent);
-    border-radius: 6px;
-    color: var(--color-light);
-    font-size: 1.125rem;
+    padding: 0.5rem 0.875rem;
+    color: var(--color-text);
+    font-weight: 500;
     text-decoration: none;
-    transition:
-      background-color var(--transition),
-      color var(--transition);
+    transition: color var(--transition);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto 0.875rem 0.25rem;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
 
     &:hover,
-    &:focus-visible {
-      background-color: var(--color-accent);
-      color: var(--color-dark);
+    &[aria-current] {
+      color: var(--color-primary);
+
+      &::after {
+        transform: scaleX(1);
+      }
     }
+  }
+
+  .nav__cta {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.125rem;
+    font-size: 0.9375rem;
   }
 
   .burger {
@@ -156,13 +225,15 @@ import { withBase } from '@/utils/url';
 
   @include below($bp-md) {
     .burger {
-      position: relative;
       display: grid;
       place-items: center;
-      padding: 0.25rem 0.25rem 0.75rem;
-      border: 0;
-      background: none;
-      color: var(--color-accent);
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-surface);
+      color: var(--color-text);
       cursor: pointer;
 
       :global(svg) {
@@ -171,47 +242,28 @@ import { withBase } from '@/utils/url';
           opacity var(--transition),
           transform var(--transition);
       }
-    }
 
-    .burger :global(.burger__close) {
-      opacity: 0;
-      transform: rotate(-90deg);
-    }
-
-    .burger__label {
-      position: absolute;
-      bottom: 0;
-      font-size: 0.625rem;
-      text-transform: uppercase;
-      color: var(--color-light);
-    }
-
-    .header[data-open] {
-      .burger :global(.burger__open) {
+      :global(.burger__close) {
         opacity: 0;
-        transform: rotate(90deg);
-      }
-
-      .burger :global(.burger__close) {
-        opacity: 1;
-        transform: rotate(0);
-      }
-
-      .nav {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
+        transform: rotate(-90deg);
       }
     }
 
     .nav {
       position: absolute;
-      inset: var(--header-height) 0 auto;
+      inset: calc(100% + 0.5rem) var(--gutter) auto;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      box-shadow: var(--shadow);
       visibility: hidden;
       opacity: 0;
-      transform: translateY(-0.5rem);
-      background: var(--gradient-dark);
-      box-shadow: 0 12px 16px -12px #000;
+      transform: translateY(-0.5rem) scale(0.98);
+      transform-origin: top right;
       transition:
         opacity var(--transition),
         transform var(--transition),
@@ -220,29 +272,55 @@ import { withBase } from '@/utils/url';
 
     .nav__list {
       flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.5rem 1rem 2rem;
     }
 
     .nav__link {
-      min-width: 12rem;
-      text-align: center;
+      padding: 0.875rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 1.125rem;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover,
+      &[aria-current] {
+        background: var(--orange-50);
+      }
+    }
+
+    .header[data-open] {
+      .nav {
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+      }
+
+      .burger :global(.burger__open) {
+        opacity: 0;
+        transform: rotate(90deg);
+      }
+
+      .burger :global(.burger__close) {
+        opacity: 1;
+        transform: none;
+      }
     }
   }
 
   @include below($bp-sm) {
-    .logo :global(.logo__icon) {
-      width: 32px;
-      height: 32px;
+    .logo__badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
     }
 
     .logo__text {
-      font-size: 1rem;
+      font-size: 0.9375rem;
     }
 
     .logo__tagline {
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
     }
   }
 </style>
